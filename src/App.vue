@@ -35,8 +35,8 @@ import UCS2 from "./utils/encodedText/UCS2";
 export default {
   data() {
     return {
-      header: new URL(location.href).searchParams.get('header'),
-      text: new URL(location.href).searchParams.get('text'),
+      header: new URL(location.href).searchParams.get('header') ?? '',
+      text: new URL(location.href).searchParams.get('text') ?? '',
     };
   },
   watch: {
