@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       text: new URL(location.href).searchParams.get('text') ?? '',
+      maxNumberOfSegments: 5,
     };
   },
   watch: {
@@ -62,7 +63,7 @@ export default {
       return [
         this.encodedFullText.getLength(),
         this.encodedFullText.getEncoding().getMaxTextLength(
-            Math.min(3, this.encodedFullText.getNumberOfSegments())
+            Math.min(this.maxNumberOfSegments, this.encodedFullText.getNumberOfSegments())
         ),
       ].join('/');
     },
@@ -78,11 +79,11 @@ export default {
       return null;
     },
     creditsLabel() {
-      return Math.min(3, this.encodedFullText.getNumberOfSegments());
+      return Math.min(this.maxNumberOfSegments, this.encodedFullText.getNumberOfSegments());
     },
     maxTextLength() {
       return this.encodedFullText.getEncoding().getMaxTextLength(
-          Math.min(3, this.encodedFullText.getNumberOfSegments())
+          Math.min(this.maxNumberOfSegments, this.encodedFullText.getNumberOfSegments())
       );
     },
     isWithinLengthLimit() {
